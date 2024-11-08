@@ -1,4 +1,4 @@
-# note_me
+# NoteMe
 
 A new Flutter project.
 
