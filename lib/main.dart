@@ -24,7 +24,10 @@ class NoteMeApp extends StatelessWidget {
     return MaterialApp(
       title: 'NoteMe',
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
+        brightness: Brightness.dark,
+        primarySwatch: Colors.amber,
+        fontFamily: 'FiraCode',
+        scaffoldBackgroundColor: Colors.black87,
       ),
       home: HomeScreen(),
     );
@@ -70,8 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('NoteMe', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-        elevation: 4,
+        title: Text('NoteMe', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.amberAccent)),
+        backgroundColor: Colors.black87,
+        elevation: 0,
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -79,9 +83,13 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             TextField(
               controller: searchController,
+              style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Search notes',
-                prefixIcon: Icon(Icons.search),
+                hintStyle: TextStyle(color: Colors.white54),
+                prefixIcon: Icon(Icons.search, color: Colors.amberAccent),
+                filled: true,
+                fillColor: Colors.white24,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -91,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 20),
             Expanded(
               child: filteredNotes.isEmpty
-                  ? Center(child: Text('No notes available', style: TextStyle(color: Colors.grey)))
+                  ? Center(child: Text('No notes available', style: TextStyle(color: Colors.white70)))
                   : ListView.builder(
                       itemCount: filteredNotes.length,
                       itemBuilder: (context, index) {
@@ -113,23 +121,23 @@ class _HomeScreenState extends State<HomeScreen> {
                             margin: EdgeInsets.only(bottom: 10),
                             padding: EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: note.color,
+                              color: note.color.withOpacity(0.7),
                               borderRadius: BorderRadius.circular(8),
                               boxShadow: [
-                                BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 2))
+                                BoxShadow(color: Colors.black54, blurRadius: 8, offset: Offset(0, 4))
                               ],
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(note.title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                                Text(note.title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
                                 if (note.subtitle.isNotEmpty) ...[
                                   SizedBox(height: 8),
-                                  Text(note.subtitle, style: TextStyle(fontSize: 14, color: Colors.black54)),
+                                  Text(note.subtitle, style: TextStyle(fontSize: 14, color: Colors.white70)),
                                 ],
                                 if (note.content.isNotEmpty) ...[
                                   SizedBox(height: 8),
-                                  Text(note.content, style: TextStyle(fontSize: 14)),
+                                  Text(note.content, style: TextStyle(fontSize: 14, color: Colors.white)),
                                 ],
                               ],
                             ),
@@ -150,8 +158,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.yellow[700],
+        child: Icon(Icons.add, size: 30),
+        backgroundColor: Colors.amber[600],
+        foregroundColor: Colors.black,
+        elevation: 6,
       ),
     );
   }
@@ -170,7 +180,7 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
   TextEditingController titleController = TextEditingController();
   TextEditingController subtitleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
-  Color selectedColor = Colors.yellow[100]!; // Default color
+  Color selectedColor = Colors.yellow[100]!;
 
   void saveNote() {
     if (titleController.text.isEmpty) {
@@ -187,7 +197,7 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
       color: selectedColor,
     );
     widget.onSave(newNote);
-    Navigator.pop(context); // Go back to the home screen
+    Navigator.pop(context);
   }
 
   @override
@@ -199,7 +209,7 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Go back to the home screen
+            Navigator.pop(context);
           },
         ),
       ),
