@@ -180,7 +180,7 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
   TextEditingController titleController = TextEditingController();
   TextEditingController subtitleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
-  Color selectedColor = Colors.yellow[100]!;
+  Color selectedColor = Colors.amber[100]!;
 
   void saveNote() {
     if (titleController.text.isEmpty) {
@@ -204,10 +204,10 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Note'),
-        elevation: 4,
+        title: Text('New Note', style: TextStyle(color: Colors.amberAccent)),
+        backgroundColor: Colors.black87,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.amberAccent),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -219,8 +219,12 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
           children: [
             TextField(
               controller: titleController,
+              style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Title',
+                hintStyle: TextStyle(color: Colors.white54),
+                filled: true,
+                fillColor: Colors.white24,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -229,8 +233,12 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
             SizedBox(height: 16),
             TextField(
               controller: subtitleController,
+              style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Subtitle',
+                hintStyle: TextStyle(color: Colors.white54),
+                filled: true,
+                fillColor: Colors.white24,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -242,8 +250,12 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
                 controller: contentController,
                 maxLines: null,
                 expands: true,
+                style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Type your note here...',
+                  hintStyle: TextStyle(color: Colors.white54),
+                  filled: true,
+                  fillColor: Colors.white24,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -254,19 +266,20 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _colorOption(Colors.pink[100]!),
-                _colorOption(Colors.blue[100]!),
-                _colorOption(Colors.yellow[100]!),
-                _colorOption(Colors.green[100]!),
+                _colorOption(Colors.pink[200]!),
+                _colorOption(Colors.blue[200]!),
+                _colorOption(Colors.amber[200]!),
+                _colorOption(Colors.green[200]!),
               ],
             ),
             SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: saveNote,
-              icon: Icon(Icons.done),
-              label: Text('Done'),
+              icon: Icon(Icons.done, color: Colors.black),
+              label: Text('Done', style: TextStyle(color: Colors.black)),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.yellow[700],
+                backgroundColor: Colors.amber[600],
+                elevation: 6,
               ),
             ),
           ],
