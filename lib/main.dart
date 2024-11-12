@@ -19,6 +19,8 @@ class Note {
 }
 
 class NoteMeApp extends StatelessWidget {
+  const NoteMeApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,6 +37,8 @@ class NoteMeApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -73,21 +77,21 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('NoteMe', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.amberAccent)),
+        title: const Text('NoteMe', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.amberAccent)),
         backgroundColor: Colors.black87,
         elevation: 0,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
               controller: searchController,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Search notes',
-                hintStyle: TextStyle(color: Colors.white54),
-                prefixIcon: Icon(Icons.search, color: Colors.amberAccent),
+                hintStyle: const TextStyle(color: Colors.white54),
+                prefixIcon: const Icon(Icons.search, color: Colors.amberAccent),
                 filled: true,
                 fillColor: Colors.white24,
                 border: OutlineInputBorder(
@@ -96,10 +100,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               onChanged: (text) => setState(() {}),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: filteredNotes.isEmpty
-                  ? Center(child: Text('No notes available', style: TextStyle(color: Colors.white70)))
+                  ? const Center(child: Text('No notes available', style: TextStyle(color: Colors.white70)))
                   : ListView.builder(
                       itemCount: filteredNotes.length,
                       itemBuilder: (context, index) {
@@ -118,26 +122,26 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           },
                           child: Container(
-                            margin: EdgeInsets.only(bottom: 10),
-                            padding: EdgeInsets.all(16),
+                            margin: const EdgeInsets.only(bottom: 10),
+                            padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               color: note.color.withOpacity(0.7),
                               borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(color: Colors.black54, blurRadius: 8, offset: Offset(0, 4))
                               ],
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(note.title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
+                                Text(note.title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)),
                                 if (note.subtitle.isNotEmpty) ...[
-                                  SizedBox(height: 8),
-                                  Text(note.subtitle, style: TextStyle(fontSize: 14, color: Colors.white70)),
+                                  const SizedBox(height: 8),
+                                  Text(note.subtitle, style: const TextStyle(fontSize: 14, color: Colors.white70)),
                                 ],
                                 if (note.content.isNotEmpty) ...[
-                                  SizedBox(height: 8),
-                                  Text(note.content, style: TextStyle(fontSize: 14, color: Colors.white)),
+                                  const SizedBox(height: 8),
+                                  Text(note.content, style: const TextStyle(fontSize: 14, color: Colors.white)),
                                 ],
                               ],
                             ),
@@ -158,10 +162,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         },
-        child: Icon(Icons.add, size: 30),
         backgroundColor: Colors.amber[600],
         foregroundColor: Colors.black,
         elevation: 6,
+        child: Icon(Icons.add, size: 30),
       ),
     );
   }
@@ -170,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
 class NewNoteScreen extends StatefulWidget {
   final Function(Note) onSave;
 
-  NewNoteScreen({required this.onSave});
+  const NewNoteScreen({super.key, required this.onSave});
 
   @override
   _NewNoteScreenState createState() => _NewNoteScreenState();
@@ -185,7 +189,7 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
   void saveNote() {
     if (titleController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Title is required to save the note')),
+        const SnackBar(content: Text('Title is required to save the note')),
       );
       return;
     }
@@ -204,25 +208,25 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Note', style: TextStyle(color: Colors.amberAccent)),
+        title: const Text('New Note', style: TextStyle(color: Colors.amberAccent)),
         backgroundColor: Colors.black87,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
               controller: titleController,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Title',
-                hintStyle: TextStyle(color: Colors.white54),
+                hintStyle: const TextStyle(color: Colors.white54),
                 filled: true,
                 fillColor: Colors.white24,
                 border: OutlineInputBorder(
@@ -230,13 +234,13 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: subtitleController,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Subtitle',
-                hintStyle: TextStyle(color: Colors.white54),
+                hintStyle: const TextStyle(color: Colors.white54),
                 filled: true,
                 fillColor: Colors.white24,
                 border: OutlineInputBorder(
@@ -244,16 +248,16 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Expanded(
               child: TextField(
                 controller: contentController,
                 maxLines: null,
                 expands: true,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Type your note here...',
-                  hintStyle: TextStyle(color: Colors.white54),
+                  hintStyle: const TextStyle(color: Colors.white54),
                   filled: true,
                   fillColor: Colors.white24,
                   border: OutlineInputBorder(
@@ -262,7 +266,7 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -272,11 +276,11 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
                 _colorOption(Colors.green[200]!),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: saveNote,
-              icon: Icon(Icons.done, color: Colors.black),
-              label: Text('Done', style: TextStyle(color: Colors.black)),
+              icon: const Icon(Icons.done, color: Colors.black),
+              label: const Text('Done', style: TextStyle(color: Colors.black)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.amber[600],
                 elevation: 6,
@@ -298,7 +302,7 @@ class _NewNoteScreenState extends State<NewNoteScreen> {
       child: CircleAvatar(
         backgroundColor: color,
         radius: selectedColor == color ? 25 : 20,
-        child: selectedColor == color ? Icon(Icons.check, color: Colors.white) : null,
+        child: selectedColor == color ? const Icon(Icons.check, color: Colors.white) : null,
       ),
     );
   }
@@ -309,7 +313,7 @@ class EditNoteScreen extends StatefulWidget {
   final Function(Note) onSave;
   final VoidCallback onDelete;
 
-  EditNoteScreen({required this.note, required this.onSave, required this.onDelete});
+  const EditNoteScreen({super.key, required this.note, required this.onSave, required this.onDelete});
 
   @override
   _EditNoteScreenState createState() => _EditNoteScreenState();
@@ -333,7 +337,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
   void saveChanges() {
     if (titleController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Title is required to save the note')),
+        const SnackBar(content: Text('Title is required to save the note')),
       );
       return;
     }
@@ -353,11 +357,11 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Note', style: TextStyle(color: Colors.amberAccent)),
+        title: const Text('Edit Note', style: TextStyle(color: Colors.amberAccent)),
         backgroundColor: Colors.black87,
         actions: [
           IconButton(
-            icon: Icon(Icons.delete, color: Colors.redAccent),
+            icon: const Icon(Icons.delete, color: Colors.redAccent),
             onPressed: () {
               widget.onDelete();
               Navigator.pop(context);
@@ -366,15 +370,15 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
               controller: titleController,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Title',
-                hintStyle: TextStyle(color: Colors.white54),
+                hintStyle: const TextStyle(color: Colors.white54),
                 filled: true,
                 fillColor: Colors.white24,
                 border: OutlineInputBorder(
@@ -382,13 +386,13 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: subtitleController,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: 'Subtitle',
-                hintStyle: TextStyle(color: Colors.white54),
+                hintStyle: const TextStyle(color: Colors.white54),
                 filled: true,
                 fillColor: Colors.white24,
                 border: OutlineInputBorder(
@@ -396,16 +400,16 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Expanded(
               child: TextField(
                 controller: contentController,
                 maxLines: null,
                 expands: true,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Type your note here...',
-                  hintStyle: TextStyle(color: Colors.white54),
+                  hintStyle: const TextStyle(color: Colors.white54),
                   filled: true,
                   fillColor: Colors.white24,
                   border: OutlineInputBorder(
@@ -414,7 +418,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -424,11 +428,11 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
                 _colorOption(Colors.green[200]!),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: saveChanges,
-              icon: Icon(Icons.done, color: Colors.black),
-              label: Text('Save Changes', style: TextStyle(color: Colors.black)),
+              icon: const Icon(Icons.done, color: Colors.black),
+              label: const Text('Save Changes', style: TextStyle(color: Colors.black)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.amber[600],
                 elevation: 6,
@@ -450,7 +454,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
       child: CircleAvatar(
         backgroundColor: color,
         radius: selectedColor == color ? 25 : 20,
-        child: selectedColor == color ? Icon(Icons.check, color: Colors.white) : null,
+        child: selectedColor == color ? const Icon(Icons.check, color: Colors.white) : null,
       ),
     );
   }
